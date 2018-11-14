@@ -5,21 +5,21 @@
   
 
   
-  <title>Java8 Stream学习 | </title>
+  <title>StreamAPI学习 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="正文&amp;emsp;&amp;emsp;说来惭愧，14年的时候Java8刚推出的时候我就安装了，但是确一直没有能学习新的特性。前段时间学习了Stream API，对于数据的处理或是遍历是真的方便，原来一段段的for循环代码可以用一句优雅的代码取代了。废话少说，看代码吧。比如在Java8之前遍历String大概类似这样：123456String s=&quot;testing&quot;;　　　　for(int i=0;i&amp;lt;">
+  <meta name="description" content="正文&amp;emsp;&amp;emsp;说来惭愧，14年的时候Java8刚推出的时候我就安装了，但是确一直没有能学习新的特性。前段时间学习了Stream API，对于数据的处理或是遍历是真的方便，原来一段段的for循环代码可以用一句优雅的代码取代了。废话少说，看代码吧。比如在Java8之前遍历String大概类似这样：123456String s=&amp;quot;testing&amp;quot;;　　　　for(int">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java8 Stream学习">
-<meta property="og:url" content="https://hslsdl123456.github.io/test/2018/11/14/java8-Stream/index.html">
+<meta property="og:title" content="StreamAPI学习">
+<meta property="og:url" content="https://hslsdl123456.github.io/test/2018/11/14/Stream学习/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="正文&amp;emsp;&amp;emsp;说来惭愧，14年的时候Java8刚推出的时候我就安装了，但是确一直没有能学习新的特性。前段时间学习了Stream API，对于数据的处理或是遍历是真的方便，原来一段段的for循环代码可以用一句优雅的代码取代了。废话少说，看代码吧。比如在Java8之前遍历String大概类似这样：123456String s=&quot;testing&quot;;　　　　for(int i=0;i&amp;lt;">
+<meta property="og:description" content="正文&amp;emsp;&amp;emsp;说来惭愧，14年的时候Java8刚推出的时候我就安装了，但是确一直没有能学习新的特性。前段时间学习了Stream API，对于数据的处理或是遍历是真的方便，原来一段段的for循环代码可以用一句优雅的代码取代了。废话少说，看代码吧。比如在Java8之前遍历String大概类似这样：123456String s=&amp;quot;testing&amp;quot;;　　　　for(int">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://hslsdl123456.github.io/test/test/2018/11/14/java8-Stream/stream-api.png">
-<meta property="og:updated_time" content="2018-11-14T14:01:58.179Z">
+<meta property="og:image" content="https://hslsdl123456.github.io/test/2018/11/14/Stream学习/stream.jpg">
+<meta property="og:updated_time" content="2018-11-14T14:41:59.670Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java8 Stream学习">
-<meta name="twitter:description" content="正文&amp;emsp;&amp;emsp;说来惭愧，14年的时候Java8刚推出的时候我就安装了，但是确一直没有能学习新的特性。前段时间学习了Stream API，对于数据的处理或是遍历是真的方便，原来一段段的for循环代码可以用一句优雅的代码取代了。废话少说，看代码吧。比如在Java8之前遍历String大概类似这样：123456String s=&quot;testing&quot;;　　　　for(int i=0;i&amp;lt;">
-<meta name="twitter:image" content="https://hslsdl123456.github.io/test/test/2018/11/14/java8-Stream/stream-api.png">
+<meta name="twitter:title" content="StreamAPI学习">
+<meta name="twitter:description" content="正文&amp;emsp;&amp;emsp;说来惭愧，14年的时候Java8刚推出的时候我就安装了，但是确一直没有能学习新的特性。前段时间学习了Stream API，对于数据的处理或是遍历是真的方便，原来一段段的for循环代码可以用一句优雅的代码取代了。废话少说，看代码吧。比如在Java8之前遍历String大概类似这样：123456String s=&amp;quot;testing&amp;quot;;　　　　for(int">
+<meta name="twitter:image" content="https://hslsdl123456.github.io/test/2018/11/14/Stream学习/stream.jpg">
   
     <link rel="alternate" href="/test/atom.xml" title="" type="application/atom+xml">
   
@@ -66,10 +66,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-java8-Stream" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="java8-Stream学习" class="article article-type-java8" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/test/2018/11/14/java8-Stream/" class="article-date">
-  <time datetime="2018-11-14T12:51:07.789Z" itemprop="datePublished">2018-11-14</time>
+    <a href="/test/2018/11/14/Stream学习/" class="article-date">
+  <time datetime="2018-11-14T14:05:57.000Z" itemprop="datePublished">2018-11-14</time>
 </a>
     
   </div>
@@ -80,7 +80,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java8 Stream学习
+      StreamAPI学习
     </h1>
   
 
@@ -88,21 +88,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p><font size="4">&emsp;&emsp;说来惭愧，14年的时候Java8刚推出的时候我就安装了，但是确一直没有能学习新的特性。<br><br>前段时间学习了Stream API，对于数据的处理或是遍历是真的方便，原来一段段的for循环代码可以用一句优雅的代码取代了。<br><br>废话少说，看代码吧。</font><br>比如在Java8之前遍历String大概类似这样：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String s=<span class="string">"testing"</span>;</span><br><span class="line">　　　　<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)</span><br><span class="line">　　　　&#123;</span><br><span class="line">　　　　　　<span class="keyword">char</span> c=s.charAt(i);</span><br><span class="line">　　　　　　System.out.print(c);</span><br><span class="line">　　　　&#125;</span><br></pre></td></tr></table></figure></p>
-<p>用Stream API就是一句代码:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="string">"testing"</span> ;</span><br><span class="line">s.chars().mapToObj(c -&gt; (<span class="keyword">char</span>)c).forEach(System.out::println);</span><br></pre></td></tr></table></figure></p>
+        <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p><font size="4">&emsp;&emsp;说来惭愧，14年的时候Java8刚推出的时候我就安装了，但是确一直没有能学习新的特性。<br><br>前段时间学习了Stream API，对于数据的处理或是遍历是真的方便，原来一段段的for循环代码可以用一句优雅的代码取代了。<br><br>废话少说，看代码吧。</font><br>比如在Java8之前遍历String大概类似这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String s=&quot;testing&quot;;</span><br><span class="line">　　　　for(int i=0;i&lt;s.length();i++)</span><br><span class="line">　　　　&#123;</span><br><span class="line">　　　　　　char c=s.charAt(i);</span><br><span class="line">　　　　　　System.out.print(c);</span><br><span class="line">　　　　&#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>用Stream API就是一句代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s = &quot;testing&quot; ;</span><br><span class="line">s.chars().mapToObj(c -&gt; (char)c).forEach(System.out::println);</span><br></pre></td></tr></table></figure></p>
 <p>需要说明的是直接foreach打印出来的是字符码，所以需要mapToObj方法将每一个字符码都转为char类型。  </p>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p><div align="center"><br><img src="/test/test/2018/11/14/java8-Stream/stream-api.png" alt="StreamAPI流程图"><br></div><br>要注意的是stream API的中间操作并不会立即执行，调用中间操作只会生成一个标记了该操作的stream，最后调用结束操作时才会执行所用操作。    </p>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p><div align="center"><br><img src="/test/2018/11/14/Stream学习/stream.jpg" title="stream API流程"><br></div><br>要注意的是stream API的中间操作并不会立即执行，调用中间操作只会生成一个标记了该操作的stream，最后调用结束操作时才会执行所用操作。    </p>
 <h3 id="创建流"><a href="#创建流" class="headerlink" title="创建流"></a>创建流</h3><ol>
 <li>通过 Collection 系列集合提供的方法 stream() 或者 parallelStream()</li>
 <li><p>由数组创建流<br>通过 Arrays中的静态方法 stream() 创建数据源 。<br>static <t> Stream <t> stream(T[] array): 返回一个流  </t></t></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer[] num = <span class="keyword">new</span> Integer[<span class="number">10</span>];</span><br><span class="line">Stream&lt;Integer&gt; stream = Arrays.stream(num);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer[] num = new Integer[10];</span><br><span class="line">Stream&lt;Integer&gt; stream = Arrays.stream(num);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>由值创建流<br>可以使用静态方法 Stream.of(), 通过显示值 创建一个流。它可以接收任意数量的参数<br>public static&lt; T&gt; Stream&lt; T&gt; of(T… values) : 返回一个流  </p>
 </li>
 <li><p>创建无限流<br>迭代：public static&lt; T&gt; Stream&lt; T&gt; iterate(final T seed, final UnaryOperator&lt; T&gt; f)<br>生成：public static&lt; T&gt; Stream&lt; T&gt; generate(Supplier&lt; T&gt; s)<br>倒计时：  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream.iterate(<span class="number">10</span>,(x)-&gt;x-<span class="number">1</span>).limit(<span class="number">10</span>).forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream.iterate(10,(x)-&gt;x-1).limit(10).forEach(System.out::println);</span><br></pre></td></tr></table></figure>
 <p>生成随机数:  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream.generate(Math::random).limit(<span class="number">1</span>).forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream.generate(Math::random).limit(1).forEach(System.out::println);</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="筛选与切片"><a href="#筛选与切片" class="headerlink" title="筛选与切片"></a>筛选与切片</h3><table>
@@ -219,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hslsdl123456.github.io/test/2018/11/14/java8-Stream/" data-id="cjoh87x2w0000tce6o0cfnin0" class="article-share-link">Share</a>
+      <a data-url="https://hslsdl123456.github.io/test/2018/11/14/Stream学习/" data-id="cjoh942z80000oge691lht3vd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -228,11 +229,15 @@
     
 <nav id="article-nav">
   
-  
-    <a href="/test/2018/11/14/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+    <a href="/test/2018/11/14/动态连接性问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          动态连接性问题
+        
+      </div>
     </a>
+  
   
 </nav>
 
@@ -268,11 +273,11 @@
       <ul>
         
           <li>
-            <a href="/test/2018/11/14/java8-Stream/">Java8 Stream学习</a>
+            <a href="/test/2018/11/14/动态连接性问题/">动态连接性问题</a>
           </li>
         
           <li>
-            <a href="/test/2018/11/14/hello-world/">Hello World</a>
+            <a href="/test/2018/11/14/Stream学习/">StreamAPI学习</a>
           </li>
         
       </ul>

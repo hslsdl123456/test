@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>动态连接性问题 | </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="正文&amp;emsp;&amp;emsp;最近在学习&amp;lt;&amp;lt;算法&amp;gt;&amp;gt;这本书，里面关于动态连接性问题让人印象深刻，何为动态连接性：设计一个数据结构来存储已知的连接信息，并能用其来判断一堆新对象是否是相连的。&amp;emsp;&amp;emsp;例如输入p,q则可以理解为p,q是相连的，同时它具有:   1.  自反性,p和q是相连的   2.  对称性，p,q相连则q,p也是相连的   3.  传递性，p,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态连接性问题">
+<meta property="og:url" content="https://hslsdl123456.github.io/test/2018/11/14/动态连接性问题/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="正文&amp;emsp;&amp;emsp;最近在学习&amp;lt;&amp;lt;算法&amp;gt;&amp;gt;这本书，里面关于动态连接性问题让人印象深刻，何为动态连接性：设计一个数据结构来存储已知的连接信息，并能用其来判断一堆新对象是否是相连的。&amp;emsp;&amp;emsp;例如输入p,q则可以理解为p,q是相连的，同时它具有:   1.  自反性,p和q是相连的   2.  对称性，p,q相连则q,p也是相连的   3.  传递性，p,">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://hslsdl123456.github.io/test/2018/11/14/动态连接性问题/sample.png">
+<meta property="og:updated_time" content="2018-11-14T14:42:11.145Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="动态连接性问题">
+<meta name="twitter:description" content="正文&amp;emsp;&amp;emsp;最近在学习&amp;lt;&amp;lt;算法&amp;gt;&amp;gt;这本书，里面关于动态连接性问题让人印象深刻，何为动态连接性：设计一个数据结构来存储已知的连接信息，并能用其来判断一堆新对象是否是相连的。&amp;emsp;&amp;emsp;例如输入p,q则可以理解为p,q是相连的，同时它具有:   1.  自反性,p和q是相连的   2.  对称性，p,q相连则q,p也是相连的   3.  传递性，p,">
+<meta name="twitter:image" content="https://hslsdl123456.github.io/test/2018/11/14/动态连接性问题/sample.png">
+  
+    <link rel="alternate" href="/test/atom.xml" title="" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/test/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/test/" id="logo"></a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/test/">Home</a>
+        
+          <a class="main-nav-link" href="/test/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/test/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hslsdl123456.github.io/test"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-动态连接性问题" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/test/2018/11/14/动态连接性问题/" class="article-date">
+  <time datetime="2018-11-14T14:16:22.000Z" itemprop="datePublished">2018-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      动态连接性问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>&emsp;&emsp;最近在学习&lt;&lt;算法&gt;&gt;这本书，里面关于动态连接性问题让人印象深刻，何为动态连接性：设计一个数据结构来存储已知的连接信息，并能用其来判断一堆新对象是否是相连的。<br>&emsp;&emsp;例如输入p,q则可以理解为p,q是相连的，同时它具有:  </p>
+<pre><code>1.  自反性,p和q是相连的  
+2.  对称性，p,q相连则q,p也是相连的  
+3.  传递性，p,q相连&amp;&amp;q,r相连则p,r相连  
+</code></pre><p>&emsp;&emsp;废话少说，要解决的问题是这样的：已知有一定数量的点，每一个点都是独立的，然后每次输入两个点之间的联系来说明两个点是相连的，如果两个点之间之前并没有相连则把这两个点连起来，如果两个点已经相连则忽略。<br><a id="more"></a><br>&emsp;&emsp;例如有6个已经标识的点：  </p>
+<p><div align="center"><br>    <img src="/test/2018/11/14/动态连接性问题/sample.png" title="动态连接性例子"><br></div><br>&emsp;&emsp;设计基本的API来进行操作；  </p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UF</td>
+<td>构造函数</td>
+</tr>
+<tr>
+<td>void union(int p,int q)</td>
+<td>连接p,q两点</td>
+</tr>
+<tr>
+<td>int find(int p)</td>
+<td>返回p所在分量(或者说是集合)的标识</td>
+</tr>
+<tr>
+<td>boolean connected(int p,int q)</td>
+<td>p,q两点在同一分量返回true反之false</td>
+</tr>
+<tr>
+<td>int count()</td>
+<td>返回所有分量的数量</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;代码模板如下:  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">    public class UF &#123;</span><br><span class="line">    </span><br><span class="line">    private int [] id;</span><br><span class="line">    private int count;</span><br><span class="line">    </span><br><span class="line">    public UF(int N)&#123;</span><br><span class="line">        count = N;</span><br><span class="line">        id = IntStream.iterate(0, (x)-&gt;x+1).limit(N).toArray();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    void union(int p,int q) &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int find(int p) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    boolean connected(int p,int q) &#123;</span><br><span class="line">        return find(p)==find(q);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int count() &#123;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;接着书中介绍了三种解决的算法，quick-find,quick-union以及加权quick-union算法。  </p>
+<h2 id="quick-find"><a href="#quick-find" class="headerlink" title="quick-find"></a>quick-find</h2><p>&emsp;&emsp;quick-find算法主要流程：对于输入两点p,q，如果p,q两点已经在同一分量内，则不采取任何操作。<br>如果两点不在同一分量则将一方分量内所有点名称改为另一方的名称。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">public class UF &#123;</span><br><span class="line">    </span><br><span class="line">    private int [] id;</span><br><span class="line">    private int count;</span><br><span class="line">    </span><br><span class="line">    public UF(int N)&#123;</span><br><span class="line">        count = N;</span><br><span class="line">        id = IntStream.iterate(0, (x)-&gt;x+1).limit(N).toArray();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    void union(int p,int q) &#123;</span><br><span class="line">        int pId = find(p);</span><br><span class="line">        int qId = find(q);</span><br><span class="line">        if(pId == qId) return; //如果p,q两点在同一分量内</span><br><span class="line">        IntStream.of(id).filter((i) -&gt; i==qId).forEach((i) -&gt; i=qId); //两点不在同一分量，将一点所在分量名称改为另一点的名称</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int find(int p) &#123;</span><br><span class="line">        return id[p];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    boolean connected(int p,int q) &#123;</span><br><span class="line">        return find(p)==find(q);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int count() &#123;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;quick-find算法缺点很明显，就是union的时候对于输入的每一组p,q，合并都需要foreach一回，效率堪忧啊。  </p>
+<h2 id="quick-union"><a href="#quick-union" class="headerlink" title="quick-union"></a>quick-union</h2><p>&emsp;&emsp;quick-union算法与quick-find算法最大不同是quick-union算法用树来表示点之间的连接信息。<br>&emsp;&emsp;id数组用来存储当前点的根节点(其实说父节点更好理解一点)，find函数则是找出当前点的根节点，那么union函数就简单了：将不在同一分量内的点的更节点设置为另一个节点的更节点就完事了。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    void union(int p,int q) &#123;</span><br><span class="line">    int pId = find(p);</span><br><span class="line">    int qId = find(q);</span><br><span class="line">    if(pId == qId) return; //如果p,q两点在同一分量内</span><br><span class="line">    id[pId] = qId;         //将p的根节点设为q节点</span><br><span class="line">    count--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int find(int p) &#123;</span><br><span class="line">    while(p!=id[p])</span><br><span class="line">        p = id[p];</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;代码更简洁也更有效率了。但是quick-union可能会有大树连接到小树的情况，树会越来越高，find函数每次执行的时间就会越来越长。  </p>
+<h2 id="加权quick-union"><a href="#加权quick-union" class="headerlink" title="加权quick-union"></a>加权quick-union</h2><p>&emsp;&emsp;加权quick-union相对于quick-union增加了存储权值的数组，每次合并时比较合并两方权值大小，小的一方将大的一方的根节点设为自己的根节点，大的一方权值+=小的权值。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">public class UF &#123;</span><br><span class="line">    </span><br><span class="line">    private int [] id;</span><br><span class="line">    private int [] sz;</span><br><span class="line">    private int count;</span><br><span class="line">    </span><br><span class="line">    public UF(int N)&#123;</span><br><span class="line">        count = N;</span><br><span class="line">        id = IntStream.iterate(0, (x)-&gt;x+1).limit(N).toArray();</span><br><span class="line">        sz = IntStream.iterate(1, x-&gt;x).limit(N).toArray();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    void union(int p,int q) &#123;</span><br><span class="line">        int pId = find(p);</span><br><span class="line">        int qId = find(q);</span><br><span class="line">        if(pId == qId) return; //如果p,q两点在同一分量内</span><br><span class="line">        if(sz[p]&lt;sz[q]) &#123;      //权值比较，避免大树加到小树上</span><br><span class="line">            id[p] = qId;</span><br><span class="line">            sz[qId] += sz[pId];</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            id[q] = pId;</span><br><span class="line">            sz[pId] += sz[qId];</span><br><span class="line">        &#125;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int find(int p) &#123;</span><br><span class="line">        while(p!=id[p])</span><br><span class="line">            p = id[p];</span><br><span class="line">        return p;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    boolean connected(int p,int q) &#123;</span><br><span class="line">        return find(p)==find(q);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int count() &#123;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>&emsp;&emsp;动态联通性问题，在解决一些实际问题时非常有效，比如计算机网络的连通性问题以及社交网络的朋友关系问题。感觉学习到了很多东西。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hslsdl123456.github.io/test/2018/11/14/动态连接性问题/" data-id="cjoh942zu0001oge6cjznm7fe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/test/2018/11/14/Stream学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">StreamAPI学习</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/test/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/test/2018/11/14/动态连接性问题/">动态连接性问题</a>
+          </li>
+        
+          <li>
+            <a href="/test/2018/11/14/Stream学习/">StreamAPI学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Patrick Huang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/test/" class="mobile-nav-link">Home</a>
+  
+    <a href="/test/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/test/fancybox/jquery.fancybox.css">
+  <script src="/test/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/test/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
