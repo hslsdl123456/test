@@ -1,0 +1,40 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>预排序遍历树算法</title><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css"><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script></head><body><nav class="main-nav"><a href="/">Home</a><a href="/archives">Archives</a></nav><div class="profile"><section id="wrapper"><header id="header"><img class="4x" id="avatar" src="/images/avatar.png"><h2>天生我柴</h2><h4>庸人自扰</h4><h1></h1><h2></h2></header></section></div><section class="post" id="wrapper"><article><header><h1>预排序遍历树算法</h1><h2 class="headline">Jun 08, 2020 11:05·1.2k words
+·4 minutes read<span class="tags"></span></h2></header><div id="toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol></div><section id="post-body"><div style="width:70%;margin:auto" align="center"><br>    <img src="/2020/06/08/modified-preorder-tree-traversal-algorithm/timg.jpg" title="tree"><br></div><br>如何将层级结构数据存进平面结构的数据库中？常见做法有四种:<br><br>邻接表：最简单也最常见的做法，俗称递归法，每个节点记录父节点的id。简单明了，但是数据层级一多查询会非常低效。<br><br> 路径枚举：数据表中一个字段来记录当前节点的路径。数据查询得用like，数据量一大，数据库压力山大。<br><br>闭包：维护一个闭包表，记录当前节点所有连结。典型空间换时间，对层级结构的增删改也较便捷。<br><br> 嵌套集：预排序遍历树算法，俗称左右值无限级分类算法，也是本文重点要说的部分，记录每一个节点的左右值，查询子树不需要递归，但增删改操作相对麻烦。<br><br># 预排序遍历树算法<br><br>用前序遍历的方法，给每一个节点设置左右值。<br><br><div style="width:70%;margin:auto" align="center"><br>    <img src="/2020/06/08/modified-preorder-tree-traversal-algorithm/tree.png" title="多叉树例子"><br></div><br><div style="width:70%;margin:auto" align="center"><br>    <img src="/2020/06/08/modified-preorder-tree-traversal-algorithm/tree_t.png" title="树前序遍历"><br></div><br><div style="width:50%;margin:auto" align="center"><br>    <img src="/2020/06/08/modified-preorder-tree-traversal-algorithm/tt1.png" title="数据表"><br></div>   
+
+<p>清楚看到根节点的左右值所组成的区间包含了所有子节点的左右值，即使树有“无限”多层也能快速查找到某个节点及其子树。例如查询G节点及其子树：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tt1 where lft between 12 and 21;</span><br></pre></td></tr></table></figure>
+<div style="width:50%;margin:auto" align="center"><br>    <img src="/2020/06/08/modified-preorder-tree-traversal-algorithm/g-tree.png" title="G节点和子节点"><br></div>   
+
+<p>添加子节点的话，要重新计算遍历顺序在当前节点之后的节点的左右值。例如添加J节点的子节点：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select @left := lft from tt1 where name = &apos;J&apos;;</span><br><span class="line">update tt1 set rgt = rgt + 2 where rgt &gt; @left;</span><br><span class="line">update tt1 set lft = lft +2 where lft &gt; @left;</span><br><span class="line">insert into tt1(name,lft,rgt) values(&apos;L&apos;,@left+1,@left+2);</span><br></pre></td></tr></table></figure>
+<p>删除节点就直接删除可以了，左右值有跳号的情况也不会影响使用。【当然左右值连续不跳号的话，可以最快算出当前节点子节点个数：（右值-左值-1）/2，也能方便判断是否有兄弟节点】<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select @left := lft,@right := rgt from tt1 where name = &apos;L&apos;;</span><br><span class="line">delete from tt1 where lft between @left and @right;</span><br></pre></td></tr></table></figure></p>
+<p>前不久在网上看到一个算是左右无限极分类算法的变种，一样的的前序遍历，不同的是不使用左右值来确定父节点和子节点之间的关系。  </p>
+<p>那么要怎么快速找出某个节点的子树呢？在前序遍历的顺序基础上，有两种情况：一是当前节点有深度一样的兄弟节点时，当前节点到兄弟节点之间的节点均为该节点的子节点；二是没有兄弟节点时，当前节点到下一个比它深度更小的节点之间的节点均为其子节点,这样一想这也是另一种形式的左右值罢了。  </p>
+<p>这种基于树形结构的前序遍历序列方法通过两个字段来达到快速查询的目标，一个是节点在前序遍历的顺序，另一个是节点的深度。  </p>
+<p>要注意的是，每个根节点要相对应设置一个结束标志，深度设为0，否则一个数据表只能存储一个树形结构的数据也太不合理了。  </p>
+<p>还是上面的例子:  </p>
+<div style="width:50%;margin:auto" align="center"><br>    <img src="/2020/06/08/modified-preorder-tree-traversal-algorithm/tt2.png" title="数据表"><br></div>  
+
+<p>例如查询G节点及其子节点：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tt2 where line &gt;=7 and line &lt; (select min(line) from tt2 where line&gt;7 and level &lt;=2);</span><br></pre></td></tr></table></figure></p>
+<div style="width:50%;margin:auto" align="center"><br>    <img src="/2020/06/08/modified-preorder-tree-traversal-algorithm/g-tree-1.png" title="G节点和子节点"><br></div>   
+
+<p>插入L节点为I节点子节点：  </p>
+<pre><code>update tt2 set line=line+1 where line&gt;=10;
+insert into tt2 (line,id,level) values (10,&apos;L&apos;,4);
+</code></pre><p>删除操作分两种情况：一是要删的是叶子节点就直接删除，二是非叶子节点的话要删该节点及其子节点,先查出节点和子节点的行号再删除。  </p>
+<p>问题来了，这种预排序树遍历算法单查询来说确实优秀，但是插入节点以及删除节点（假如一定要维持不跳号的话）会牵一发而动全身，需要重新计算和维护相关字段。假设一开始就知道之后需要对节点进行相当的增删动作的话，可以考虑进行跳号设计，比如A节点行号为1，B节点则设为10000，中间有9998个空号可以使用，相应操作就不会影响后边的节点。  </p>
+<p>这种方案不可避免的缺点是当需要对树的节点进行移动的时候必须要重新维护整个表的前序遍历顺序和行号深度或者左右值。当需要大量进行节点移动操作的时候，闭包表方法应该是更优的方法。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://www.iteye.com/blog/drinkjava2-2353983" target="_blank" rel="noopener">发明了一种新的树结构数据库存储方案</a> </li>
+<li><a href="https://blog.csdn.net/liwenxia626/article/details/81316747" target="_blank" rel="noopener">mysql左右值无限分类原理及实现</a></li>
+</ul>
+</section><nav id="post-nav"><span class="prev"></span><span class="next"><a href="/2020/04/25/KMP-algorithm/">Older Posts<span class="arrow">→</span></a></span></nav><div id="container"></div><link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"><script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script><script>var gitment = new Gitment({
+id:  '预排序遍历树算法',
+owner: 'hslsdl123456',
+repo: 'test',
+oauth: {
+    client_id: '18f6cfbface82f7213b7',
+    client_secret: '31b6012408c0085c3462a665438c32530e3959d7',
+},
+})
+gitment.render('container')</script></article></section><footer id="footer"><p class="small">Powered by &nbsp;<a href="https://hexo.io/">Hexo &nbsp;</a></p></footer><script>hljs.initHighlightingOnLoad();</script></body></html>
